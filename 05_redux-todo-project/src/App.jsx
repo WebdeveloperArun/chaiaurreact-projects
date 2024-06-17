@@ -1,15 +1,17 @@
-import React from 'react'
-import Todos from './components/Todos'
-import AddTodo from './components/Add'
+import React from "react";
+import Todos from "./components/Todos";
+import AddTodo from "./components/Add";
 
 const App = () => {
-  return (
-    <div>
-      <h1>Learn About Redux</h1>
-      <AddTodo/>
-      <Todos/>
-    </div>
-  )
-}
+  const [input, setInput] = React.useState("");
+  const [id, setId] = React.useState(null);
 
-export default App
+  return (
+    <div className="w-full flex flex-col p-14 px-44">
+      <AddTodo input={input} setInput={setInput} id={id} setId={setId} />
+      <Todos setInput={setInput} setId={setId} />
+    </div>
+  );
+};
+
+export default App;
