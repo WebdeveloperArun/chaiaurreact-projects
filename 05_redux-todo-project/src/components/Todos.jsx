@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo, updateTodo } from "../features/todo/todoSlice";
+import { removeTodo} from "../features/todo/todoSlice";
 
 const Todos = ({ setInput, setId }) => {
+  const [completed, setCompleted] = useState(false)
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
@@ -20,7 +21,18 @@ const Todos = ({ setInput, setId }) => {
             className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
-            <div className="text-white">{todo.text}</div>
+            <input
+              type="checkbox"
+              completed={completed}
+              onChange={() => setCompleted(!completed)}
+            />
+            {completed === true ? (
+              <s className="text-red-600">
+                <div className="text-white">{todo.text}</div>{" "}
+              </s>
+            ) : (
+              <div className="text-white">{todo.text}</div>
+            )}
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={() => editHandler(todo.id, todo.text)}
