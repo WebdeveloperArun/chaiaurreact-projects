@@ -1,22 +1,37 @@
-import './App.css'
-import conf from './conf/conf'
-import auth from './appwrite/auth'
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import auth from "./appwrite/auth";
+import { login, logout } from "./store/authSlice.js";
+import Header from "./components/Header/Header.jsx";
+import Footer from "./components/Footer/Footer.jsx";
+import { Outlet } from "react-router-dom"
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
-  // const res = auth.login({
-  //   email: "arunkumar62841203@gmail.com",
-  //   password: "12345678",
-  // });
-  // console.log(res);
-  // const respons = auth.getUser()
-  // console.log(respons);
+  useEffect(() => {
+    auth
+      .getUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
-  return (
-    <div className='w-full h-screen bg-zinc-600 flex justify-center'>
-     <h1>Hallo</h1>
+  return !loading ? (
+    <div>
+      <Header />
+      <main> Todo:  <Outlet/></main>
+      <Footer />
     </div>
-  )
+  ) : (
+    <h1>Loading ...</h1>
+  );
 }
 
-export default App
+export default App;
