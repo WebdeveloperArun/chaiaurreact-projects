@@ -40,7 +40,7 @@ const Header = () => {
     <header>
       <Container>
         <nav className="flex justify-around">
-          <h2> <Link to="/" >Blog-Do</Link> </h2>
+          <h2> <Link to="/" >Do-Blog</Link> </h2>
           <ul className="flex gap-4">
             {navItems && navItems.map((item) => item.active ? (
               <li key={item.name}>

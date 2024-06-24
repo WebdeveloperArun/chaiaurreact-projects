@@ -26,7 +26,7 @@ function App() {
   return !loading ? (
     <div>
       <Header />
-      <main> Todo:  <Outlet/></main>
+      <main><Outlet/></main>
       <Footer />
     </div>
   ) : (
