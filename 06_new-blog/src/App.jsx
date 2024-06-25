@@ -10,9 +10,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    auth
-      .getUser()
+  useEffect( () => {
+     auth.getUser()
       .then((userData) => {
         if (userData) {
           dispatch(login({ userData }));
@@ -26,7 +25,9 @@ function App() {
   return !loading ? (
     <div>
       <Header />
-      <main><Outlet/></main>
+     
+     <Outlet/>
+      
       <Footer />
     </div>
   ) : (

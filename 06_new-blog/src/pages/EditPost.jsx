@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { PostForm } from '../components';
+import service from '../appwrite/post';
+
 
 const EditPost = () => {
     const { slug } = useParams();

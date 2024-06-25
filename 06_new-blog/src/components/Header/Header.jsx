@@ -26,35 +26,45 @@ const Header = () => {
     },
     {
       name: "All Posts",
-      slug: "/",
+      slug: "/all-posts",
       active: authStatus,
     },
     {
       name: "Add Post",
-      slug: "/",
+      slug: "/add-post",
       active: authStatus,
     },
-  ]
+  ];
   
   return (
-    <header>
+    <header className="bg-gray-900 text-white">
       <Container>
-        <nav className="flex justify-around">
-          <h2> <Link to="/" >Do-Blog</Link> </h2>
+        <nav className="flex justify-between items-center p-4">
+          <h2 className="text-2xl font-bold">
+            <Link to="/" className="hover:text-gray-400">
+              Do-Blog
+            </Link>
+          </h2>
           <ul className="flex gap-4">
-            {navItems && navItems.map((item) => item.active ? (
-              <li key={item.name}>
-                <button onClick={() => navigate(item.slug)}>{item.name}</button>
-              </li>
-            ) : (null))}
+            {navItems &&
+              navItems.map((item) =>
+                item.active ? (
+                  <li key={item.name}>
+                    <button
+                      onClick={() => navigate(item.slug)}
+                      className="hover:text-gray-400"
+                    >
+                      {item.name}
+                    </button>
+                  </li>
+                ) : null
+              )}
           </ul>
-          {authStatus && (
-            <LogoutBtn/>
-          )}
+          {authStatus && <LogoutBtn />}
         </nav>
       </Container>
     </header>
-  )
+  );
 };
 
 export default Header;

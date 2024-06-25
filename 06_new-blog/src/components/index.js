@@ -13,6 +13,7 @@ import Select from "./Select"
 import PostComponent from "./PostComponent";
 import PostForm from "./PostForm";
 import AuthLayout from "./AuthLayout"
+import RTE from "./RTE"
 
 export {
   Header,
@@ -28,5 +29,6 @@ export {
   PostComponent,
   PostForm,
   AuthLayout,
+  RTE,
 };
 

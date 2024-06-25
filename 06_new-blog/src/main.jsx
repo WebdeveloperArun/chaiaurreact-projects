@@ -49,19 +49,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-post",
-        element: (
-          <AuthLayout authentication={true}>
-            <AddPost />
-          </AuthLayout>
-        ),
+        element: <AddPost />,
       },
       {
         path: "/edit-post/:slug",
-        element: (
-          <AuthLayout authentication={true}>
-            <EditPost />
-          </AuthLayout>
-        ),
+        element: <EditPost />,
       },
       {
         path: "/post/:slug",

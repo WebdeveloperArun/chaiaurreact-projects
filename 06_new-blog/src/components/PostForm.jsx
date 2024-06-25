@@ -6,8 +6,10 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import service from "../appwrite/post";
 import { useSelector } from "react-redux";
+import {RTE} from "./index"
 
 const PostForm = ({ post }) => {
+  console.log(post);
   const navigate = useNavigate();
   const { register, handleSubmit, watch, control, getValues, setValue } =
     useForm({
@@ -26,7 +28,7 @@ const PostForm = ({ post }) => {
       const file = data.image[0]
         ? await service.uploadFile(data.image[0])
         : null;
-      if (res) {
+      if (file) {
         await service.deleteFile(post.featuredImage);
       }
 
@@ -41,15 +43,19 @@ const PostForm = ({ post }) => {
       const file = data.image[0]
         ? await service.uploadFile(data.image[0])
         : null;
-      await service.createPost({
+        console.log(userId);
+      const dbPost = await service.createPost({
         ...data,
-        featuredImage: file.$id,
-        userId: userId ? userId : undefined,
-      });
+        featuredImage: file? file.$id : undefined,
+        userId: userId ? userId.$id : undefined,
+      })
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}`);
+      }
     }
   };
 
-  const slugTransform = useCallback((value) => {
+  const slugTransform = React.useCallback((value) => {
     if (value && typeof value === "string")
       return value
         .trim()

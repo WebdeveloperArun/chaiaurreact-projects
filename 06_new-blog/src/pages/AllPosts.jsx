@@ -4,11 +4,12 @@ import { PostCard } from '../components';
 
 const AllPosts = () => {
   const [posts, setPosts] = useState([]);
+  console.log(posts);
 
   useEffect(() => {
     service.getPosts().then((posts) => {
       if (posts) {
-        setPosts(posts)
+        setPosts(posts.documents)
       }
     })
   },[])
